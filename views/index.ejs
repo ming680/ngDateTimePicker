@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='myApp'>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="stylesheets/ngDateTimePicker.css">
+</head>
+<body ng-controller='myCtrl'>
+	<div class='wrapper'>
+		<ng-date-time-picker ng-model='datetime' selected='selected()' format='yyyy-MM-dd HH:mm:ss'></ng-date-time-picker>
+	</div>
+	ng-model : <input type="text" ng-model='datetime'>
+	<script src='javascripts/angular.min.js'></script>
+	<!-- <script src='javascripts/ngDateTimePicker.js'></script> -->
+	<script src='javascripts/tpl-ngDateTimePicker.js'></script>
+	<script>
+		angular.module('myApp', ['ngDateTimePicker'])
+			.controller('myCtrl', function($scope){
+				$scope.datetime = new Date()
+				$scope.selected = function(){
+					alert('选择完了')
+				}
+			})
+	</script>
+</body>
+</html>

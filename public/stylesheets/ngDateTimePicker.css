@@ -1,0 +1,189 @@
+.ng_dt_wrapper *{
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	margin:0px;
+	padding: 0px;
+	list-style: none;
+	/*
+	Introduced in IE 10.
+	See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	*/
+	-ms-user-select: none;
+	user-select: none;
+	box-sizing: border-box;
+}
+.ng_dt_wrapper{
+	width:310px;
+	min-width: 300px;
+	color: #48576a;
+    border: 1px solid #d1dbe5;
+    box-shadow: 0 2px 6px #ccc;
+    background: #fff;
+    border-radius: 2px;
+    line-height: 20px;
+    padding:10px ;
+    font-size: 14px;
+    color:#48576a
+}
+.ng_dt_title{
+	position: relative;
+	margin-bottom: 10px;
+}
+.ng_dt_title .ng_dt_title_box{
+	z-index: 2;
+}
+.ng_dt_day{
+	width: 100%;
+}
+.ng_dt_day table{
+	width: 100%
+}
+.ng_dt_day table th,
+.ng_dt_day table td{
+	text-align: center;
+	line-height: 2em;
+}
+.ng_dt_day table td:hover{
+	cursor: pointer;
+	background-color: #eee;
+}
+.ng_dt_day table td.cur_day{
+	color: #fff;
+	background-color: #20a0ff!important;
+}
+.dt_select_wrapper{
+	box-sizing: border-box;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;	
+	cursor: pointer;
+}
+.dt_select_wrapper::after{
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 100%;
+	border:1px solid rgb(169, 169, 169);
+	border-radius: 3px;
+	top:0px;
+	left: 0px;
+	z-index: -1;
+	box-sizing: border-box;
+}
+.dt_option_hide {
+	display: none;
+}
+.dt_option_show_bottom,
+.dt_option_show_top{
+	max-height: 200px;
+	overflow:hidden;
+	position: absolute;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #fff;
+	border: 1px solid #d1dbe5;
+    box-shadow: 0 2px 2px #ccc;
+    background: #fff;
+    z-index: 1;
+    left:0px;
+}
+.dt_option_show_top{
+    top:0px;
+    transform:translateY(-100%)
+}
+.dt_scroller_bar{
+	position: absolute;
+    width: 7px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+.dt_scroller_bar .dt_scroller{
+	height:10px;
+	display: block;
+	background-color: #ccc;
+	border-radius: 5px;
+
+}
+.dt_scroller_bar .dt_scroller:hover{
+	background-color: #20a0ff!important;
+}
+
+.dt_select_title{
+	cursor: pointer;
+	text-align: inherit;
+	position: relative;
+	padding-right: 14px;
+	min-height: 1.5em;
+	min-width: 34px;
+	border-radius: 3px;
+ 
+}
+.dt_select_title:hover{
+	text-decoration: underline;
+}
+.dt_select_wrapper::before{
+	position: absolute;
+	content:"";
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	border-top: 5px solid black;
+	top:50%;
+	transform:translateY(-25%);
+	right: 5px;
+}
+.one_option{
+	text-align: inherit;
+	line-height: 2em;
+	padding-right: 14px;
+}
+.one_option:hover{
+	background-color: #eee;
+	cursor: pointer;
+}
+
+.ng_dt_time{
+	margin:10px 0;
+	position: relative;
+}
+
+.ng_dt_center{
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	z-index: 1;
+	transform:translateX(-50%)
+}
+
+.ng_dt_title span,
+.ng_dt_time span {
+	font-weight: 700;
+	font-size: 12px;
+}
+
+.ng_dt_bar{
+	text-align: right;
+	height: 3em;
+	line-height: 3em;
+}
+.ng_dt_bar span{
+	padding: 5px 20px;
+	border:1px solid #eee;
+	cursor: pointer;
+	border-radius: 3px;
+	margin-left: 10px;
+}
+
+.ng_dt_bar span:hover{
+	border:1px solid #20a0ff;
+	background-color: #20a0ff;
+	color:#fff;
+}
+.ng_dt_bar span:active{
+	border:1px solid rgb(32, 160, 255);
+	background-color: rgb(32, 130, 255);
+}

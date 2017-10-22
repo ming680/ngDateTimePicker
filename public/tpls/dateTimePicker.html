@@ -1,0 +1,62 @@
+<div class='ng_dt_wrapper'>
+	<div class='ng_dt_title'>
+		<div class='ng_dt_title_box ng_dt_center'>
+			<dt-select  ng-model='year' ng-change='change()' style='padding: 0 15px; text-align: center; line-height: 2em;' >
+				<dt-option ng-repeat='item in yearCol' label='{{item}}' value='{{item}}'></dt-option>
+			</dt-select>
+				<span>年</span>
+			<dt-select ng-model='month'  ng-change='change()' style='padding: 0 15px; text-align: center; line-height: 2em;' >
+				<dt-option ng-repeat='item in monthCol' label='{{item}}' value='{{item}}'></dt-option>
+			</dt-select>
+			<span>月</span>
+		</div>
+	</div>
+	<div class='ng_dt_day'>
+		<table>
+			<thead>
+				<tr>
+					<th>日</th>
+					<th>一</th>
+					<th>二</th>
+					<th>三</th>
+					<th>四</th>
+					<th>五</th>
+					<th>六</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='one in dataCol track by $index'>
+					<td ng-repeat='x in one track by $index' ng-click='selectDay(x)' ng-class="{true:'cur_day', false:''}[day == x]">{{x}}</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+
+	<div class="ng_dt_time">
+		<div class="ng_dt_time_box ng_dt_center" >
+			<dt-select direction='top' ng-model='hour'  style='padding: 0 15px; text-align: center; line-height: 2em;' >
+				<dt-option ng-repeat='item in range(24) track by $index' label='{{$index | addZero}}' value='{{$index}}'></dt-option>
+			</dt-select>	
+	         <span>
+	         	时
+	         </span>
+			<dt-select direction='top' ng-model='minute' style='padding: 0 15px; text-align: center; line-height: 2em;' >
+				<dt-option ng-repeat='item in range(60) track by $index' label='{{$index | addZero}}' value='{{$index}}'></dt-option>
+			</dt-select>
+			<span>
+				分
+			</span>
+			<dt-select direction='top' ng-model='second'  style='padding: 0 15px; text-align: center; line-height: 2em;' >
+				<dt-option ng-repeat='item in range(60) track by $index' label="{{$index | addZero}}" value="{{$index}}"></dt-option>	
+			</dt-select>
+			<span>
+				秒
+			</span>
+		</div>
+	</div>
+	<div class='ng_dt_bar'>
+		<span ng-click='nowDate()'>此刻</span>
+		<span ng-click='selectedDate()'>确定</span>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<div class='dt_select_wrapper' ng-click='toggle()' >
+	<div class='dt_select_title' >{{label}}</div>
+	<div class='dt_scroller_wrapper' ng-class="{'dt_option_show_bottom':show&&!top, 'dt_option_hide':!show, 'dt_option_show_top':show&&top}">
+	<ul ng-transclude></ul>
+	<div class='dt_scroller_bar'>
+		<div class='dt_scroller'></div>
+	</div>
+	</div>
+</div>
