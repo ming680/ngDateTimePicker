@@ -149,9 +149,7 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
                 $scroller_wrapper.bind('click', function(ev){
                 	ev.stopPropagation();
                 })
-                // $element.bind('mousewheel', function(ev){
-                // 	ev.stopPropagation()
-                // })
+            
 
                 $scroller_wrapper.bind('mousewheel', function(ev){
                 	//滚动距离  
@@ -295,8 +293,6 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 				scope.value = attr.value;
 				scope.select = ctrl.select;
 				ctrl.collectObj(scope.value, scope.label)
-
-
 				if(scope.$last){
 					ctrl.repeatDone()
 				}

@@ -20,9 +20,12 @@ angular.module('myApp',[])
 			ctrl.$render = function(){
                 _initContent = ctrl.$isEmpty(ctrl.$viewValue) ? '' : ctrl.$viewValue;
                 scope.value = _initContent //双向绑定
+
                 // 格式化 传入的 时间 
                 Number(scope.value)|| Number(scope.value) == 0?scope.value=Number(scope.value):scope.value;
+
                 var date = new Date(scope.value) ;
+             
                 if(date == 'Invalid Date'){
                 	// 使用 此刻时间
                 	date = new Date();
@@ -141,19 +144,31 @@ angular.module('myApp',[])
 			var height; //内容框 高度 
 			var scroller_height;
 			var scroller_top;
+
 			//内容框ul 
             var content_ul = $element.find('ul')[0];
             //内容框 margin-top;
             var content_range = parseInt(window.getComputedStyle(content_ul)['margin-top']);
+
             //滚筒条  
             var scroller = angular.element($element[0].querySelector('.dt_scroller'))[0];
+
+
             $scroller_wrapper.bind('click', function(ev){
             	ev.stopPropagation();
             })
+        
+
             $scroller_wrapper.bind('mousewheel', function(ev){
             	//滚动距离  
-            	var wheel_range = ev.wheelDeltaY;
+            	console.log(ev)
+            	// ev.stopPropagation()
+            	var wheel_range = ev.wheelDeltaY?ev.wheelDeltaY:ev.originalEvent.wheelDeltaY;
+            	// console.log(ev)
             	move(wheel_range)
+            	ev.preventDefault()  //阻止默认事件
+				ev.stopPropagation()
+            	
             })
             var mouseon_scroller_top;
             var mouseon_content_range;
@@ -217,11 +232,13 @@ angular.module('myApp',[])
             }
 
 			this.repeatDone = function(){
+				// console.log(content_ul)
 				height = parseInt(window.getComputedStyle(content_ul)['height']);
-
+				console.log(height)
      	    	//计算 滚动条 长度  
      	    	scroller_height = 200/height * 200;
      	    	scroller.style.height = scroller_height + 'px';
+     	    	$scope.show = false
      	    	$scope.match();
 			}
 
@@ -238,8 +255,9 @@ angular.module('myApp',[])
 		},
 		link:function(scope, ele, attr, ctrl){
 			//判断 方向  
+			// console.log('eleh', window.getComputedStyle(ele[0]).height)
 			attr.direction=='top'?scope.top=true:scope.top=false;
-			scope.show = false;
+			scope.show = true;
 			scope.toggle = function(){
 				scope.show = !scope.show
 			}
@@ -282,8 +300,8 @@ angular.module('myApp',[])
 			scope.label = attr.label;
 			scope.value = attr.value;
 			scope.select = ctrl.select;
-
 			ctrl.collectObj(scope.value, scope.label)
+
 
 			if(scope.$last){
 				ctrl.repeatDone()

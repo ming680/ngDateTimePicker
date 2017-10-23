@@ -4,21 +4,29 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="stylesheets/ngDateTimePicker.css">
+	<link rel="stylesheet" href="stylesheets/bootstrap.css">
+
 </head>
 <body ng-controller='myCtrl'>
 	<div class='wrapper'>
-		<ng-date-time-picker ng-model='datetime'  ></ng-date-time-picker>
-		<ng-date-time-picker ng-model='datetime'  ></ng-date-time-picker>
+		<div  uib-dropdown auto-close='outsideClick' is-open='true'>
+			<input type="text" ng-model='datetime' uib-dropdown-toggle>
+			<ul uib-dropdown-menu>
+				<ng-date-time-picker ng-model='datetime'></ng-date-time-picker>
+			</ul>
+		</div>
 	</div>
-	ng-model : <input type="text" ng-model="datetime">
+	<!-- ng-model : <input type="text" ng-model="datetime"> -->
 	<script src='javascripts/angular.min.js'></script>
 	<script src='javascripts/angular-animate.js'></script>
 	<!-- <script src='javascripts/ngDateTimePicker.js'></script> -->
+	<script type="text/javascript" src='javascripts/ui-bootstrap-tpls-2.5.0.min.js'></script>
+
 	<script src='javascripts/tpl-ngDateTimePicker.js'></script>
 	<script>
-		angular.module('myApp', ['ngDateTimePicker'])
+		angular.module('myApp', ['ui.bootstrap','ngDateTimePicker','ngAnimate'])
 			.controller('myCtrl', function($scope){
-				// $scope.datetime = new Date()
+				$scope.datetime = new Date()
 				$scope.selected = function(){
 					console.log($scope.datetime)
 					alert('选择完了')
