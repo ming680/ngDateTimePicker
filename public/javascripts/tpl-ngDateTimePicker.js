@@ -149,12 +149,19 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
                 $scroller_wrapper.bind('click', function(ev){
                 	ev.stopPropagation();
                 })
-
+                // $element.bind('mousewheel', function(ev){
+                // 	ev.stopPropagation()
+                // })
 
                 $scroller_wrapper.bind('mousewheel', function(ev){
                 	//滚动距离  
-                	var wheel_range = ev.wheelDeltaY;
+                	console.log(ev)
+                	// ev.stopPropagation()
+                	var wheel_range = ev.wheelDeltaY?ev.wheelDeltaY:ev.originalEvent.wheelDeltaY;
+                	// console.log(ev)
                 	move(wheel_range)
+                	ev.preventDefault()  //阻止默认事件
+					ev.stopPropagation()
                 	
                 })
                 var mouseon_scroller_top;
@@ -219,11 +226,13 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
                 }
 
 				this.repeatDone = function(){
+					// console.log(content_ul)
 					height = parseInt(window.getComputedStyle(content_ul)['height']);
-
+					console.log(height)
          	    	//计算 滚动条 长度  
          	    	scroller_height = 200/height * 200;
          	    	scroller.style.height = scroller_height + 'px';
+         	    	$scope.show = false
          	    	$scope.match();
 				}
 
@@ -240,8 +249,9 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 			},
 			link:function(scope, ele, attr, ctrl){
 				//判断 方向  
+				// console.log('eleh', window.getComputedStyle(ele[0]).height)
 				attr.direction=='top'?scope.top=true:scope.top=false;
-				scope.show = false;
+				scope.show = true;
 				scope.toggle = function(){
 					scope.show = !scope.show
 				}
@@ -274,7 +284,7 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 			}
 		}
 	})
-	.directive('dtOption', function(){
+	.directive('dtOption', function($window){
 		return {
 			restrict:'E',
 			templateUrl:"selecte_option.html",
@@ -284,8 +294,8 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 				scope.label = attr.label;
 				scope.value = attr.value;
 				scope.select = ctrl.select;
-
 				ctrl.collectObj(scope.value, scope.label)
+
 
 				if(scope.$last){
 					ctrl.repeatDone()

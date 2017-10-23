@@ -1,3 +1,5 @@
+
+
 .ng_dt_wrapper *{
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -12,6 +14,9 @@
 	-ms-user-select: none;
 	user-select: none;
 	box-sizing: border-box;
+}
+.ng_dt_wrapper *:focus{
+	outline: none;
 }
 .ng_dt_wrapper{
 	width:310px;
@@ -73,6 +78,8 @@
 }
 .dt_option_hide {
 	display: none;
+	// opacity: 0;
+	
 }
 .dt_option_show_bottom,
 .dt_option_show_top{
