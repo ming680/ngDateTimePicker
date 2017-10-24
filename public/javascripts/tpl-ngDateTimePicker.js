@@ -6,18 +6,16 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 			replace:true,
 			require:'ngModel',
 			scope:{
-				selected:"&"
+				selected: '&'
 			},
 			link:function(scope, ele, attr, ctrl){
+			
 				ctrl.$render = function(){
                     _initContent = ctrl.$isEmpty(ctrl.$viewValue) ? '' : ctrl.$viewValue;
                     scope.value = _initContent //双向绑定
-
                     // 格式化 传入的 时间 
-                    Number(scope.value)|| Number(scope.value) == 0?scope.value=Number(scope.value):scope.value;
-
+                    Number(scope.value)|| (Number(scope.value) == 0 && scope.value)?scope.value=Number(scope.value):scope.value;
                     var date = new Date(scope.value) ;
-                 
                     if(date == 'Invalid Date'){
                     	// 使用 此刻时间
                     	date = new Date();
@@ -36,7 +34,6 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 				scope.selectedDate = function(){
 					var str = scope.year +'/'+scope.month+'/'+scope.day+' '+scope.hour+':'+scope.minute+':'+scope.second;
 					if(attr.format){
-
 						var value = $filter('date')(new Date(str), attr.format);
 					}else{
 						var value = new Date(str).getTime()
