@@ -120,7 +120,7 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 			replace:true,
 			transclude : true,
 			scope:{},
-			controller:function($scope, $element){
+			controller:function($scope, $element, $timeout){
 				this.select = function(value, label){
 					$scope.show = false;
 					$scope.value = value;
@@ -153,7 +153,7 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 
                 $scroller_wrapper.bind('mousewheel', function(ev){
                 	//滚动距离  
-                	console.log(ev)
+                	// console.log(ev)
                 	// ev.stopPropagation()
                 	var wheel_range = ev.wheelDeltaY?ev.wheelDeltaY:ev.originalEvent.wheelDeltaY;
                 	// console.log(ev)
@@ -218,22 +218,33 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
                 	}else if(scroller_top < 0){
                 		scroller_top = 0;
                 	}
-
-
                 	scroller.style.marginTop = scroller_top +'px'
                 }
 
 				this.repeatDone = function(){
-					// console.log(content_ul)
-					height = parseInt(window.getComputedStyle(content_ul)['height']);
-					console.log(height)
-         	    	//计算 滚动条 长度  
-         	    	scroller_height = 200/height * 200;
-         	    	scroller.style.height = scroller_height + 'px';
-         	    	$scope.show = false
          	    	$scope.match();
 				}
+				$scope.toggle = function(){
+					$scope.show = !$scope.show
 
+					if($scope.toggle){
+						var timer = $timeout(timeFunc,2);
+						timer.then(function(data){
+							if(data){
+								$timeout.cancel(timer)
+							}else{
+								timer = $timeout(timeFunc,2);
+							}
+						});
+						function timeFunc(){
+							height = parseInt(window.getComputedStyle(content_ul)['height']);
+							//计算 滚动条 长度  
+							scroller_height = 200/height * 200;
+							scroller.style.height = scroller_height + 'px';
+							return height
+						}
+					}
+				}
 				$scope.match = function(){
 					//根据  scope.value  匹配 scope.label;
 					this.label = '';
@@ -247,16 +258,11 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 			},
 			link:function(scope, ele, attr, ctrl){
 				//判断 方向  
-				// console.log('eleh', window.getComputedStyle(ele[0]).height)
 				attr.direction=='top'?scope.top=true:scope.top=false;
-				scope.show = true;
-				scope.toggle = function(){
-					scope.show = !scope.show
-				}
+				scope.show = false;
 				ctrl.$render = function(){
                     _initContent = ctrl.$isEmpty(ctrl.$viewValue) ? '' : ctrl.$viewValue;
                     scope.value = _initContent //双向绑定
-                    
                 }
                 ctrl.$render();
                 scope.$watch('value', function(){
