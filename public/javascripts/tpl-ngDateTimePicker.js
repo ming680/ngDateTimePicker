@@ -1,4 +1,67 @@
 angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapper.html', 'selecte_option.html'])
+	.factory('ngDateTimePicker', ['$rootScope','$compile', function($rootScope, $compile){
+		var $modal = {};
+		var $dom;
+		$modal.open = function(modalOptions){
+
+			function getElementPosition(ele){
+				var l = ele.offsetLeft;
+				var t = ele.offsetTop;
+				var _ele = ele;
+				while(_ele.offsetParent.offsetParent){
+					_ele = _ele.offsetParent;
+					c = _ele.offsetLeft;
+					d = _ele.offsetTop
+					l = l + c;
+					t = t + d;
+				}
+				return{
+					left : l,
+					top : t
+				}
+			}
+			
+			if(typeof modalOptions == 'object' && Object.prototype.toString.call(modalOptions) == "[object Object]"){
+				// 创建编译函数
+				var target = modalOptions.position;
+				var ngModel = modalOptions.ngModel;
+				var $scope = modalOptions.$scope;
+
+
+				var left = getElementPosition(target).left;
+				var top = getElementPosition(target).top;
+				var compileFn = $compile("<ng-masker></ng-masker>"+
+					"<div class='ng_dt_pop' style='left:"+left+"px;top:"+top+"px' >"+
+					"<ng-date-time-picker ng-model='"+ngModel+"' selected='selected()'>"+
+					"</ng-date-time-picker></div>");
+					
+				$scope.selected = function(){
+					$dom.remove()
+				}
+				$dom = compileFn($scope); 
+
+				// // 添加到文档中
+				angular.element(document.body).append($dom); 
+			}
+		}
+		$modal.close = function(){
+			$dom.remove()
+
+		}
+		return $modal
+	}])
+	.directive('ngMasker', function(ngDateTimePicker){
+		return{
+			restrict : 'E',
+			template : "<div class='ng_dt_masker'></div>",
+			link: function(scope, ele, attr){
+				ele.bind('click', function(){
+					ngDateTimePicker.close()
+				})
+				
+			}
+		}
+	})
 	.directive('ngDateTimePicker', function($filter){
 		return {
 			restrict:'E',

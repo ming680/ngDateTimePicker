@@ -8,15 +8,17 @@
 
 </head>
 <body ng-controller='myCtrl'>
-	<div class='wrapper'>
+	<!-- <div class='wrapper'>
 		<div  uib-dropdown auto-close='outsideClick' is-open='false'>
 			<input type="text" ng-model='datetime' uib-dropdown-toggle>
 			<ul uib-dropdown-menu>
 				<ng-date-time-picker ng-model='datetime'></ng-date-time-picker>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 	<!-- ng-model : <input type="text" ng-model="datetime"> -->
+	
+	<input type="text" class='input' ng-model='datetime' ng-click='show($event)' style="position: absolute; left: 200px;top: 300px">
 	<script src='javascripts/angular.min.js'></script>
 	<script src='javascripts/angular-animate.js'></script>
 	<!-- <script src='javascripts/ngDateTimePicker.js'></script> -->
@@ -24,12 +26,14 @@
 
 	<script src='javascripts/tpl-ngDateTimePicker.js'></script>
 	<script>
-		angular.module('myApp', ['ui.bootstrap','ngDateTimePicker','ngAnimate'])
-			.controller('myCtrl', function($scope){
-				$scope.datetime = new Date()
-				$scope.selected = function(){
-					console.log($scope.datetime)
-					alert('选择完了')
+		angular.module('myApp', ['ngDateTimePicker'])
+			.controller('myCtrl', function($scope, ngDateTimePicker){
+				$scope.show = function(ev){
+					ngDateTimePicker.open({
+						$scope : $scope,
+						ngModel : 'datetime',
+						position : ev.target
+					})
 				}
 			})
 	</script>

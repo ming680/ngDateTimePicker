@@ -29,7 +29,7 @@
     line-height: 20px;
     padding:10px ;
     font-size: 14px;
-    color:#48576a
+    color:#48576a;
 }
 .ng_dt_title{
 	position: relative;
@@ -193,4 +193,20 @@
 .ng_dt_bar span:active{
 	border:1px solid rgb(32, 160, 255);
 	background-color: rgb(32, 130, 255);
+}
+
+.ng_dt_masker{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	top: 0px;
+	background-color: rgba(0,0,0,0);
+	z-index: 99;
+}
+
+.ng_dt_pop{
+	position: absolute;
+	width:310px;
+	z-index: 100;
 }
