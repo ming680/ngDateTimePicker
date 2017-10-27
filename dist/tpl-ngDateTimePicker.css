@@ -63,6 +63,7 @@
 	display: inline-block;
 	vertical-align: middle;	
 	cursor: pointer;
+	
 }
 .dt_select_wrapper::after{
 	position: absolute;
@@ -78,7 +79,11 @@
 }
 .dt_option_hide {
 	display: none;
-	// opacity: 0;
+	
+}
+.dt_scroller_wrapper {
+	max-height: 0px;
+	overflow:hidden;
 	
 }
 .dt_option_show_bottom,
@@ -207,4 +212,5 @@
 	position: absolute;
 	width:310px;
 	z-index: 100;
+	transform: translateY(-50%)
 }
