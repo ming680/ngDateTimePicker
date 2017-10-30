@@ -10,7 +10,7 @@ Usage
 ```
 //引入css文件
 
-  <link src='dist/tpl-ngDateTimePicker.css'></link>
+  <link href='dist/tpl-ngDateTimePicker.css'></link>
 ....  
 
 //在引入angular.js后引入 tpl-ngDateTimePicker.js
