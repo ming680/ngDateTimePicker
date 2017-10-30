@@ -26,13 +26,14 @@ angular.module('ngDateTimePicker',['dateTimePicker_wrapper.html', 'selecte_wrapp
 				var target = modalOptions.position;
 				var ngModel = modalOptions.ngModel;
 				var $scope = modalOptions.$scope;
+				var format = modalOptions.format;
 
 
 				var left = getElementPosition(target).left;
 				var top = getElementPosition(target).top;
 				var compileFn = $compile("<ng-masker></ng-masker>"+
 					"<div class='ng_dt_pop' style='left:"+left+"px;top:"+top+"px' >"+
-					"<ng-date-time-picker ng-model='"+ngModel+"' selected='selected()'>"+
+					"<ng-date-time-picker ng-model='"+ngModel+"' selected='selected()' format='"+ format+"'>"+
 					"</ng-date-time-picker></div>");
 					
 				$scope.selected = function(){
