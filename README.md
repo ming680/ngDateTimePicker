@@ -42,7 +42,7 @@ angular.module('myApp',['ngDateTimePicker'])
 			format : 'yyyy-MM-dd HH:mm:ss' //绑定元素输出的格式  若无该属性，格式为时间戳
 	                                      //所支持的格式 见 angular 内置date 过滤器
 	     })
-   }
+	}
 })
 ```
 
