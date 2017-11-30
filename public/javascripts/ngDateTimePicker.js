@@ -164,7 +164,16 @@ angular.module('myApp',[])
 				move(wheel_range)
 				ev.preventDefault()  //阻止默认事件
 				ev.stopPropagation()
-				
+			})
+			$scroller_wrapper.on('DOMMouseScroll', function(ev){
+				//滚动距离  
+				// console.log(ev)
+				// ev.stopPropagation()
+				var wheel_range = ev.wheelDeltaY?ev.wheelDeltaY:ev.originalEvent.wheelDeltaY;
+				// console.log(ev)
+				move(wheel_range)
+				ev.preventDefault()  //阻止默认事件
+				ev.stopPropagation()
 			})
 			var mouseon_scroller_top;
 			var mouseon_content_range;
